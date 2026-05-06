@@ -1983,7 +1983,7 @@ Jakarta Barat</div>
              document.addEventListener('DOMContentLoaded', function() {
                  const urlParams = new URLSearchParams(window.location.search);
                  const barcodeUid = urlParams.get('id');
-                 const eveentApiBaseUrl = 'https://wardah-kiki.my.canva.site/';
+                 const eveentApiBaseUrl = 'https://wardah-kiki.my.canva.site';
                  if (barcodeUid && eveentApiBaseUrl) {
                      if (sessionStorage.getItem('clicked_' + barcodeUid) !== 'true') {
                          fetch(`${eveentApiBaseUrl}/api/track-click/${barcodeUid}`, {
