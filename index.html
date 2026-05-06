@@ -1980,32 +1980,73 @@ Jakarta Barat</div>
                 opacity: 1 !important; visibility: visible !important; text-indent: 0 !important; display: inline !important;            }
             </style>
                     <script>
-             document.addEventListener('DOMContentLoaded', function() {
-                 const urlParams = new URLSearchParams(window.location.search);
-                 const barcodeUid = urlParams.get('id');
-                 const eveentApiBaseUrl = 'https://wardah-kiki.my.canva.site';
-                 if (barcodeUid && eveentApiBaseUrl) {
-                     if (sessionStorage.getItem('clicked_' + barcodeUid) !== 'true') {
-                         fetch(`${eveentApiBaseUrl}/api/track-click/${barcodeUid}`, {
-                             method: 'POST',
-                             headers: { 'Content-Type': 'application/json' }
-                         })
-                         .then(response => {
-                             if (!response.ok && response.status !== 404) {
-                                 throw new Error('Server Error');
-                             }
-                             return response;
-                         })
-                         .then(response => {
-                             if (response.ok) {
-                                 sessionStorage.setItem('clicked_' + barcodeUid, 'true');
-                             }
-                         })
-                         .catch(error => {});
-                     }
-                 }
-             });
-        </script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Ambil elemen form berdasarkan ID yang ada di source code Anda
+    var rsvpForm = document.getElementById('ev-rsvp-form');
+    
+    if (rsvpForm) {
+        rsvpForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah pengiriman default agar diarahkan ke WhatsApp
+            
+            // 1. Ambil data dari input form
+            var nama = document.getElementById('author').value;
+            var kehadiranEl = document.querySelector('input[name="attendance"]:checked');
+            var ucapan = document.getElementById('comment').value;
+            var jumlahTamu = document.getElementById('guest').value;
+            
+            var kehadiran = '';
+            var statusTamu = '';
+            
+            // 2. Konversi nilai kehadiran ke teks yang mudah dibaca
+            if (kehadiranEl) {
+                switch(kehadiranEl.value) {
+                    case 'present': 
+                        kehadiran = 'Hadir ✅'; 
+                        statusTamu = `👥 Jumlah Tamu: ${jumlahTamu} orang`;
+                        break;
+                    case 'notsure': 
+                        kehadiran = 'Masih Ragu 🤔'; 
+                        statusTamu = '';
+                        break;
+                    case 'notpresent': 
+                        kehadiran = 'Tidak Hadir ❌'; 
+                        statusTamu = '';
+                        break;
+                    default: 
+                        kehadiran = '-'; 
+                        statusTamu = '';
+                }
+            } else {
+                kehadiran = 'Belum dipilih';
+            }
+            
+            // 3. Format Pesan WhatsApp
+            var pesan = `📩 *RSVP Undangan Wardah & Kiki*\n\n` +
+                        `👤 Nama: ${nama}\n` +
+                        `✅ Kehadiran: ${kehadiran}\n`;
+            
+            if (statusTamu) {
+                pesan += `${statusTamu}\n`;
+            }
+            
+            pesan += `💌 Ucapan & Doa:\n${ucapan}\n\n` +
+                     `_Dikirim dari Website Undangan Digital_`;
+            
+            // 4. Nomor WhatsApp Tujuan (Format Internasional: 62881010875831)
+            var nomorWA = '62881010875831';
+            
+            // 5. Buat URL WhatsApp dan buka di tab baru
+            var urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            window.open(urlWA, '_blank');
+            
+            // Opsional: Reset form setelah tombol dikirim
+            // rsvpForm.reset();
+        });
+    }
+});
+</script>
+
+
         				</div>
 				</div>
 					</div>
