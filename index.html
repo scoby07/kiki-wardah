@@ -298,6 +298,8 @@ var EvGlobal = {"ajaxurl":"https://hi.inviee.id/wp-admin/admin-ajax.php","isAdmi
     document.addEventListener('DOMContentLoaded', function() {
       var el = document.getElementById('nama-tamu-display');
       if (el) el.textContent = namaTamu;
+      var elQr = document.getElementById('qr-nama-tamu-display');
+      if (elQr) elQr.textContent = namaTamu;
     });
   }
 })();
@@ -2380,7 +2382,7 @@ var WdsAudio = {"source":"url","audio_link":"https://ugly-gray-9l9pyipmyd.edgeon
 <div class="ewf-content-area">
 <div class="ewf-content-left">
 <span class="label">Kepada Yth. Bapak/Ibu/Saudara/i</span>
-<span class="guest-name">
+<span class="guest-name" id="qr-nama-tamu-display">
                             Nama Tamu                        </span>
 </div>
 <div class="ewf-content-right">
