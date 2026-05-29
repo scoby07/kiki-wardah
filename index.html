@@ -283,12 +283,25 @@ var EvGlobal = {"ajaxurl":"https://hi.inviee.id/wp-admin/admin-ajax.php","isAdmi
 <div class="elementor-widget-container">
 <p class="elementor-heading-title elementor-size-default">Kepada Yth. Bapak/Ibu/Saudara/i</p> </div><div class="elementor-element elementor-element-2069bbad namatamu elementor-widget elementor-widget-heading" data-id="2069bbad" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
 				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title elementor-size-default"></h2>				</div>
+					<h2 class="elementor-heading-title elementor-size-default" id="nama-tamu-display">Nama Tamu</h2>				</div>
 </div>
 <div class="elementor-element elementor-element-2069bbad namatamu elementor-widget elementor-widget-heading" data-e-type="widget" data-element_type="widget" data-id="2069bbad" data-widget_type="heading.default">
 <div class="elementor-widget-container">
 <h2 class="elementor-heading-title elementor-size-default"></h2> </div>
 </div>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var namaTamu = params.get('to');
+  if (namaTamu) {
+    namaTamu = decodeURIComponent(namaTamu);
+    document.addEventListener('DOMContentLoaded', function() {
+      var el = document.getElementById('nama-tamu-display');
+      if (el) el.textContent = namaTamu;
+    });
+  }
+})();
+</script>
 <div class="elementor-element elementor-element-6cc43e73 elementor-align-center animated-slow elementor-invisible elementor-widget elementor-widget-button" data-e-type="widget" data-element_type="widget" data-id="6cc43e73" data-settings='{"_animation":"zoomIn"}' data-widget_type="button.default" id="wds-button-cover">
 <div class="elementor-widget-container">
 <div class="elementor-button-wrapper">
